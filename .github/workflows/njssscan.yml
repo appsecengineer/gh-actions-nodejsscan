@@ -1,13 +1,19 @@
 name: njsscan
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
 jobs:
   njsscan:
     runs-on: ubuntu-latest
     name: njsscan check
+    permissions:
+      # required for all workflows
+      security-events: write
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
     steps:
     - uses: actions/checkout@v4
     - name: nodejsscan scan
